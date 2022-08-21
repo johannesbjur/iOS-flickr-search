@@ -21,12 +21,12 @@ enum ImageDownloadError: Error {
 }
 
 protocol ImageDownloadServiceProtocol {
-    func fetchImageItems(for string: String) async throws -> [ImageItem]
+    func fetchImageItems(with string: String) async throws -> [ImageItem]
     func fetchImageData(from url: URL) async throws -> Data
 }
 
 final class ImageDownloadService: ImageDownloadServiceProtocol {
-    func fetchImageItems(for string: String) async throws -> [ImageItem] {
+    func fetchImageItems(with string: String) async throws -> [ImageItem] {
         let urlString = Constants.domain + Constants.path + Constants.parameters + string + Constants.apiKey
         guard let url = URL(string: urlString) else { throw ImageDownloadError.urlParsingError }
 

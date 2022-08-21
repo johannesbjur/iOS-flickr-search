@@ -7,15 +7,25 @@
 
 import UIKit
 
+protocol ViewControllerProtocol: AnyObject {
+    func addImageDataToCollectionView(imageData: Data)
+    func showError(with message: String)
+}
+
 final class ViewController: UIViewController {
     private var images: [UIImage] = []
+    private let searchBar = UISearchBar()
     private let imageCollectionView = UICollectionView(frame: .zero,
                                                        collectionViewLayout: UICollectionViewFlowLayout())
+    
+    private var presenter: PresenterProtocol?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        presenter = Presenter(imageDownloadService: ImageDownloadService(),
+                              viewDelegate: self)
         setupCollectionView()
+        setupSearchBar()
     }
 
     override func viewDidLayoutSubviews() {
@@ -23,6 +33,26 @@ final class ViewController: UIViewController {
         imageCollectionView.frame = view.bounds
     }
 }
+
+// MARK: - ViewControllerProtocol functions
+extension ViewController: ViewControllerProtocol {
+    func addImageDataToCollectionView(imageData: Data) {
+        guard let image = UIImage(data: imageData) else { return }
+        images.append(image)
+        DispatchQueue.main.async {
+            self.imageCollectionView.reloadData()
+        }
+    }
+
+    func showError(with message: String) {
+        let alert = UIAlertController(title: title,
+                                      message: message,
+                                      preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Close", style: .default))
+        self.present(alert, animated: true, completion: nil)
+    }
+}
+
 
 // MARK: - Private functions
 private extension ViewController {
@@ -32,6 +62,13 @@ private extension ViewController {
         imageCollectionView.delegate = self
         imageCollectionView.dataSource = self
         view.addSubview(imageCollectionView)
+    }
+
+    func setupSearchBar() {
+        searchBar.delegate = self
+        searchBar.sizeToFit()
+        searchBar.showsCancelButton = true
+        navigationItem.titleView = searchBar
     }
 }
 
@@ -63,5 +100,21 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 24
+    }
+}
+
+// MARK: - Search bar delegate functions
+extension ViewController: UISearchBarDelegate {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.endEditing(true)
+    }
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let searchText = searchBar.text else { return }
+        images = []
+        imageCollectionView.reloadData()
+        Task {
+            await self.presenter?.fetchImages(with: searchText)
+        }
     }
 }
