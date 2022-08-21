@@ -16,6 +16,8 @@
 		20E1F99D28B264C8006B7A02 /* iOS_flickr_searchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E1F99C28B264C8006B7A02 /* iOS_flickr_searchTests.swift */; };
 		20E1F9A728B264C8006B7A02 /* iOS_flickr_searchUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E1F9A628B264C8006B7A02 /* iOS_flickr_searchUITests.swift */; };
 		20E1F9A928B264C8006B7A02 /* iOS_flickr_searchUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E1F9A828B264C8006B7A02 /* iOS_flickr_searchUITestsLaunchTests.swift */; };
+		20E1F9B628B265C0006B7A02 /* ImageDownloadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E1F9B528B265C0006B7A02 /* ImageDownloadService.swift */; };
+		20E1F9B828B2660D006B7A02 /* ImageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E1F9B728B2660D006B7A02 /* ImageItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		20E1F9A228B264C8006B7A02 /* iOS-flickr-searchUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iOS-flickr-searchUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		20E1F9A628B264C8006B7A02 /* iOS_flickr_searchUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS_flickr_searchUITests.swift; sourceTree = "<group>"; };
 		20E1F9A828B264C8006B7A02 /* iOS_flickr_searchUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS_flickr_searchUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		20E1F9B528B265C0006B7A02 /* ImageDownloadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloadService.swift; sourceTree = "<group>"; };
+		20E1F9B728B2660D006B7A02 /* ImageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +109,8 @@
 				20E1F98B28B264C7006B7A02 /* Main.storyboard */,
 				20E1F98E28B264C8006B7A02 /* Assets.xcassets */,
 				20E1F99028B264C8006B7A02 /* LaunchScreen.storyboard */,
+				20E1F9B928B26635006B7A02 /* Service */,
+				20E1F9BA28B26640006B7A02 /* Model */,
 				20E1F99328B264C8006B7A02 /* Info.plist */,
 			);
 			path = "iOS-flickr-search";
@@ -125,6 +131,22 @@
 				20E1F9A828B264C8006B7A02 /* iOS_flickr_searchUITestsLaunchTests.swift */,
 			);
 			path = "iOS-flickr-searchUITests";
+			sourceTree = "<group>";
+		};
+		20E1F9B928B26635006B7A02 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				20E1F9B528B265C0006B7A02 /* ImageDownloadService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		20E1F9BA28B26640006B7A02 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				20E1F9B728B2660D006B7A02 /* ImageItem.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,8 +281,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				20E1F98A28B264C7006B7A02 /* ViewController.swift in Sources */,
+				20E1F9B628B265C0006B7A02 /* ImageDownloadService.swift in Sources */,
 				20E1F98628B264C7006B7A02 /* AppDelegate.swift in Sources */,
 				20E1F98828B264C7006B7A02 /* SceneDelegate.swift in Sources */,
+				20E1F9B828B2660D006B7A02 /* ImageItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

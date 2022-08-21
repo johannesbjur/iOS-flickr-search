@@ -2,7 +2,7 @@
 //  SceneDelegate.swift
 //  iOS-flickr-search
 //
-//  Created by Tove Jansson on 2022-08-21.
+//  Created by Johannes Bjurströmer on 2022-08-21.
 //
 
 import UIKit

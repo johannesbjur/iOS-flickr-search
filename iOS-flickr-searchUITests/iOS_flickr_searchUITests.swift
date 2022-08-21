@@ -2,7 +2,7 @@
 //  iOS_flickr_searchUITests.swift
 //  iOS-flickr-searchUITests
 //
-//  Created by Tove Jansson on 2022-08-21.
+//  Created by Johannes Bjurströmer on 2022-08-21.
 //
 
 import XCTest
