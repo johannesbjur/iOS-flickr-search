@@ -13,7 +13,7 @@
 		20E1F98D28B264C7006B7A02 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20E1F98B28B264C7006B7A02 /* Main.storyboard */; };
 		20E1F98F28B264C8006B7A02 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20E1F98E28B264C8006B7A02 /* Assets.xcassets */; };
 		20E1F99228B264C8006B7A02 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20E1F99028B264C8006B7A02 /* LaunchScreen.storyboard */; };
-		20E1F99D28B264C8006B7A02 /* iOS_flickr_searchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E1F99C28B264C8006B7A02 /* iOS_flickr_searchTests.swift */; };
+		20E1F99D28B264C8006B7A02 /* PresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E1F99C28B264C8006B7A02 /* PresenterTests.swift */; };
 		20E1F9A728B264C8006B7A02 /* iOS_flickr_searchUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E1F9A628B264C8006B7A02 /* iOS_flickr_searchUITests.swift */; };
 		20E1F9A928B264C8006B7A02 /* iOS_flickr_searchUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E1F9A828B264C8006B7A02 /* iOS_flickr_searchUITestsLaunchTests.swift */; };
 		20E1F9B628B265C0006B7A02 /* ImageDownloadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E1F9B528B265C0006B7A02 /* ImageDownloadService.swift */; };
@@ -49,7 +49,7 @@
 		20E1F99128B264C8006B7A02 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		20E1F99328B264C8006B7A02 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		20E1F99828B264C8006B7A02 /* iOS-flickr-searchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iOS-flickr-searchTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		20E1F99C28B264C8006B7A02 /* iOS_flickr_searchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS_flickr_searchTests.swift; sourceTree = "<group>"; };
+		20E1F99C28B264C8006B7A02 /* PresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresenterTests.swift; sourceTree = "<group>"; };
 		20E1F9A228B264C8006B7A02 /* iOS-flickr-searchUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iOS-flickr-searchUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		20E1F9A628B264C8006B7A02 /* iOS_flickr_searchUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS_flickr_searchUITests.swift; sourceTree = "<group>"; };
 		20E1F9A828B264C8006B7A02 /* iOS_flickr_searchUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS_flickr_searchUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -124,7 +124,7 @@
 		20E1F99B28B264C8006B7A02 /* iOS-flickr-searchTests */ = {
 			isa = PBXGroup;
 			children = (
-				20E1F99C28B264C8006B7A02 /* iOS_flickr_searchTests.swift */,
+				20E1F99C28B264C8006B7A02 /* PresenterTests.swift */,
 			);
 			path = "iOS-flickr-searchTests";
 			sourceTree = "<group>";
@@ -316,7 +316,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				20E1F99D28B264C8006B7A02 /* iOS_flickr_searchTests.swift in Sources */,
+				20E1F99D28B264C8006B7A02 /* PresenterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
