@@ -15,6 +15,7 @@ final class ImageCollectionViewCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.contentMode = .scaleToFill
         imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 8
         return imageView
     }()
     

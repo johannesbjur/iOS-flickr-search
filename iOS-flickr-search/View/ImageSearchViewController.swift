@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ImageSearchViewController.swift
 //  iOS-flickr-search
 //
 //  Created by Johannes Bjurströmer on 2022-08-21.
@@ -7,22 +7,22 @@
 
 import UIKit
 
-protocol ViewControllerProtocol: AnyObject {
-    func addImageDataToCollectionView(imageData: Data)
+protocol ImageSearchViewControllerProtocol: AnyObject {
+    func addImageDataToCollectionView(imageData: Data, imageId: String)
     func showError(with message: String)
 }
 
-final class ViewController: UIViewController {
-    private var images: [UIImage] = []
+final class ImageSearchViewController: UIViewController {
+    private var images: [(image: UIImage, id: String)] = []
     private let searchBar = UISearchBar()
     private let imageCollectionView = UICollectionView(frame: .zero,
                                                        collectionViewLayout: UICollectionViewFlowLayout())
     
-    private var presenter: PresenterProtocol?
+    private var presenter: ImageSearchPresenterProtocol?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter = Presenter(imageDownloadService: ImageDownloadService(),
+        presenter = ImageSearchPresenter(imageDownloadService: ImageDownloadService(),
                               viewDelegate: self)
         setupCollectionView()
         setupSearchBar()
@@ -34,11 +34,11 @@ final class ViewController: UIViewController {
     }
 }
 
-// MARK: - ViewControllerProtocol functions
-extension ViewController: ViewControllerProtocol {
-    func addImageDataToCollectionView(imageData: Data) {
+// MARK: - ImageSearchViewControllerProtocol functions
+extension ImageSearchViewController: ImageSearchViewControllerProtocol {
+    func addImageDataToCollectionView(imageData: Data, imageId: String) {
         guard let image = UIImage(data: imageData) else { return }
-        images.append(image)
+        images.append((image, imageId))
         DispatchQueue.main.async {
             self.imageCollectionView.reloadData()
         }
@@ -55,7 +55,7 @@ extension ViewController: ViewControllerProtocol {
 
 
 // MARK: - Private functions
-private extension ViewController {
+private extension ImageSearchViewController {
     func setupCollectionView() {
         imageCollectionView.register(ImageCollectionViewCell.self,
                                      forCellWithReuseIdentifier: ImageCollectionViewCell.identifier)
@@ -73,7 +73,7 @@ private extension ViewController {
 }
 
 // MARK: - Collection view functions
-extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension ImageSearchViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return images.count
     }
@@ -82,13 +82,19 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
         let cell = imageCollectionView.dequeueReusableCell(withReuseIdentifier: ImageCollectionViewCell.identifier,
                                                            for: indexPath)
         guard let cell = cell as? ImageCollectionViewCell else { return cell }
-        cell.configure(with: images[indexPath.row])
+        cell.configure(with: images[indexPath.row].image)
         return cell
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard images.indices.contains(indexPath.row) else { return }
+        let imageInfoVC = ImageInfoViewController(image: images[indexPath.row].image, imageId: images[indexPath.row].id)
+        navigationController?.present(imageInfoVC, animated: true)
     }
 }
 
 // MARK: - Collection view layout functions
-extension ViewController: UICollectionViewDelegateFlowLayout {
+extension ImageSearchViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 96,
                       height: 96)
@@ -104,7 +110,7 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
 }
 
 // MARK: - Search bar delegate functions
-extension ViewController: UISearchBarDelegate {
+extension ImageSearchViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.endEditing(true)
     }

@@ -9,7 +9,7 @@ import XCTest
 @testable import iOS_flickr_search
 
 final class PresenterTests: XCTestCase {
-    var presenter: PresenterProtocol!
+    var presenter: ImageSearchPresenterProtocol!
     private var mockService: MockService!
     private var mockViewController: MockViewController!
     
@@ -17,8 +17,8 @@ final class PresenterTests: XCTestCase {
         super.setUp()
         mockService = MockService()
         mockViewController = MockViewController()
-        presenter = Presenter(imageDownloadService: mockService,
-                              viewDelegate: mockViewController)
+        presenter = ImageSearchPresenter(imageDownloadService: mockService,
+                                         viewDelegate: mockViewController)
     }
     
     override func tearDown() {
@@ -76,17 +76,21 @@ private final class MockService: ImageDownloadServiceProtocol {
         }
         return Data()
     }
+
+    func fetchImageInfo(with id: String) async throws -> ImageInfo {
+        return ImageInfo(id: "123", title: ContentInfo(_content: "test"), description: ContentInfo(_content: "test"))
+    }
 }
 
-private final class MockViewController: ViewControllerProtocol {
+private final class MockViewController: ImageSearchViewControllerProtocol {
     var errorMessage: String = ""
     var addImageDataToCollectionViewCalled: Bool = false
 
-    func addImageDataToCollectionView(imageData: Data) {
-        addImageDataToCollectionViewCalled = true
-    }
-
     func showError(with message: String) {
         errorMessage = message
+    }
+
+    func addImageDataToCollectionView(imageData: Data, imageId: String) {
+        addImageDataToCollectionViewCalled = true
     }
 }

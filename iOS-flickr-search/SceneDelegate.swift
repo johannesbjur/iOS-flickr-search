@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: scene)
 
-        let rootVC = ViewController()
+        let rootVC = ImageSearchViewController()
         let navigationController = UINavigationController(rootViewController: rootVC)
 
         window?.rootViewController = navigationController

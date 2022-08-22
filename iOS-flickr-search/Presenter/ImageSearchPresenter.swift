@@ -1,5 +1,5 @@
 //
-//  Presenter.swift
+//  ImageSearchPresenter.swift
 //  iOS-flickr-search
 //
 //  Created by Johannes Bjurströmer on 2022-08-21.
@@ -7,15 +7,15 @@
 
 import Foundation
 
-protocol PresenterProtocol {
+protocol ImageSearchPresenterProtocol {
     func fetchImages(with string: String) async
 }
 
-final class Presenter: PresenterProtocol {
+final class ImageSearchPresenter: ImageSearchPresenterProtocol {
     private let imageDownloadService: ImageDownloadServiceProtocol
-    private weak var viewDelegate: ViewControllerProtocol?
+    private weak var viewDelegate: ImageSearchViewControllerProtocol?
     
-    init(imageDownloadService: ImageDownloadServiceProtocol, viewDelegate: ViewControllerProtocol) {
+    init(imageDownloadService: ImageDownloadServiceProtocol, viewDelegate: ImageSearchViewControllerProtocol) {
         self.imageDownloadService = imageDownloadService
         self.viewDelegate = viewDelegate
     }
@@ -26,7 +26,7 @@ final class Presenter: PresenterProtocol {
                 guard let urlString = imageItem.url_sq,
                       let url = URL(string: urlString) else { continue }
                 let imageData = try await imageDownloadService.fetchImageData(from: url)
-                viewDelegate?.addImageDataToCollectionView(imageData: imageData)
+                viewDelegate?.addImageDataToCollectionView(imageData: imageData, imageId: imageItem.id)
             }
         } catch let error as ImageDownloadError {
             let message: String
